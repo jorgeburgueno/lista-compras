@@ -10,7 +10,7 @@ function Recipes({ onSubmitRecipe }) {
   const handleChange = (e) => {
     setRecipe((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value, // name se refiere al nombre de la propiedad que se le dio al <input>
     }));
   };
 

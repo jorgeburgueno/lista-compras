@@ -15,10 +15,15 @@ function RecipeManager() {
     setRecipeList((prevRecipe) => [...prevRecipe, newRecipeId]);
   };
 
+  const deleteRecipe = (id) => {
+    setRecipeList(recipeList.filter(a => a.id !== id));
+    console.log("borrado");
+  };
+
   return (
     <div>
       <Recipes onSubmitRecipe={addRecipe} />
-      <DisplayRecipe recipes={recipeList} />
+      <DisplayRecipe recipes={recipeList} deleteRecipe={deleteRecipe} />
     </div>
   );
 }
