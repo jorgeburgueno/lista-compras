@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 
 function Recipes({ onSubmitRecipe }) {
+  const [addRecipe, setAddRecipe] = useState(false);
+
   const [recipe, setRecipe] = useState({
     name: "",
     ingredients: [],
@@ -18,24 +20,37 @@ function Recipes({ onSubmitRecipe }) {
     e.preventDefault();
     onSubmitRecipe(recipe);
     setRecipe({ name: "", ingredients: [] });
+    setAddRecipe(false);
   };
 
   return (
     <div>
-      <label>
-        add recipe:
-        <input name="name" value={recipe.name} onChange={handleChange}></input>
-      </label>
-      <label>
-        {" "}
-        ingredients:
-        <input
-          name="ingredients"
-          value={recipe.ingredients}
-          onChange={handleChange}
-        />
-      </label>
-      <button onClick={handleSubmit}>✔</button>
+      <button onClick={() => setAddRecipe(!addRecipe)}>
+        Añadir nueva receta
+      </button>
+
+      {addRecipe && (
+        <div>
+          <label>
+            add recipe:
+            <input
+              name="name"
+              value={recipe.name}
+              onChange={handleChange}
+            ></input>
+          </label>
+          <label>
+            {" "}
+            ingredients:
+            <input
+              name="ingredients"
+              value={recipe.ingredients}
+              onChange={handleChange}
+            />
+          </label>
+          <button onClick={handleSubmit}>✔</button>
+        </div>
+      )}
     </div>
   );
 }

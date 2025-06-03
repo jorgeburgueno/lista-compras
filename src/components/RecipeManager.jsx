@@ -16,7 +16,7 @@ function RecipeManager() {
   };
 
   const deleteRecipe = (id) => {
-    setRecipeList(recipeList.filter(a => a.id !== id));
+    setRecipeList(recipeList.filter((a) => a.id !== id));
     console.log("borrado");
   };
 
