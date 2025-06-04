@@ -3,17 +3,32 @@ import { useState } from "react";
 
 function Recipes({ onSubmitRecipe }) {
   const [addRecipe, setAddRecipe] = useState(false);
-  const [counter, setCounter] = useState(1);
 
   const [recipe, setRecipe] = useState({
     name: "",
-    ingredients: [],
+    ingredients: [""],
   });
 
   const handleChange = (e) => {
     setRecipe((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value, // name se refiere al nombre de la propiedad que se le dio al <input>
+      name: e.target.value,
+    }));
+  };
+
+  const addIngredientField = () => {
+    setRecipe((prev) => ({
+      ...prev,
+      ingredients: [...prev.ingredients, ""],
+    }));
+  };
+
+  const handleIngredientChange = (e, index) => {
+    setRecipe((prev) => ({
+      ...prev,
+      ingredients: prev.ingredients.map((ingredient, i) =>
+        i === index ? e.target.value : ingredient
+      ),
     }));
   };
 
@@ -40,14 +55,19 @@ function Recipes({ onSubmitRecipe }) {
               onChange={handleChange}
             ></input>
           </label>
-          <button onClick={() => setCounter(counter + 1)}>+</button>
+          <button onClick={addIngredientField}>+</button>
           <label>
             ingredient:
-            <input
-              name="ingredients"
-              value={recipe.ingredients}
-              onChange={handleChange}
-            />
+            {recipe.ingredients.map((ingredient, index) => (
+              <div key={index}>
+                <input
+                  name={`ingredient-${index}`}
+                  value={ingredient}
+                  onChange={(e) => handleIngredientChange(e, index)}
+                  placeholder={`ingrediente ${index + 1}`}
+                />
+              </div>
+            ))}
           </label>
 
           <button onClick={handleSubmit}>✔</button>
