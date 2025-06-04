@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function Recipes({ onSubmitRecipe }) {
   const [addRecipe, setAddRecipe] = useState(false);
+  const [counter, setCounter] = useState(1);
 
   const [recipe, setRecipe] = useState({
     name: "",
@@ -39,15 +40,16 @@ function Recipes({ onSubmitRecipe }) {
               onChange={handleChange}
             ></input>
           </label>
+          <button onClick={() => setCounter(counter + 1)}>+</button>
           <label>
-            {" "}
-            ingredients:
+            ingredient:
             <input
               name="ingredients"
               value={recipe.ingredients}
               onChange={handleChange}
             />
           </label>
+
           <button onClick={handleSubmit}>✔</button>
         </div>
       )}
